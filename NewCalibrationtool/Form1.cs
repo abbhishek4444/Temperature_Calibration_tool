@@ -856,7 +856,7 @@ namespace NewCalibrationtool
             return ret_val;
         }
         #endregion
-        //--------------------------------------------xxxxxxxxxxxxxxxxxxxxxxxx------------------------------xxxxxxxxxxxxxxxxxxxxxxx-----------------
+        //--------------------------------------------xxxxxxxxxxxxxxxxxxxxxxxx------------------------------xxxxxxxxxxxxxxxxxxxxxxx--------------------
 
         private string GetChuckTemp(string cmd)
         {
