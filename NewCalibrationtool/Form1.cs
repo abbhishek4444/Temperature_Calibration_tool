@@ -1535,18 +1535,18 @@ namespace NewCalibrationtool
         {
             if (simulatorTemp < 320 )
             {
-                if (bestvalue == true && counter <= 3)
+                if (bestvalue == true && counter <= 3)  // if best value equals to true and counter is less than 3 then we will take small temperature steps of 20.
                 {
                     simulatorTemp += 20;
-                    bestloop = true;
+                    bestloop = true;                     
                    
                 }
-                else if (counter < 3)
+                else if (counter < 3)                  //If counter is less than 3 then we will take temperature steps of 60.
                 {
                     simulatorTemp += 60;
                 }
           
-                else
+                else                                  // If counter is more than 3 then we will take temperature steps of 80.   
                 {
                     simulatorTemp += 80;
                 }
@@ -1557,7 +1557,7 @@ namespace NewCalibrationtool
             else
             {
 
-                if (bestvalue == true && bestloop == true)
+                if (bestvalue == true && bestloop == true)   // If best values and best loop both are true then we will stops timers .
                 {
 
                     loopTimer.Stop();
