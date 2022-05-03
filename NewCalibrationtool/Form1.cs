@@ -270,7 +270,7 @@ namespace NewCalibrationtool
         {
             try
             {
-                this.ReadComTimer.Stop();
+                
                 this.TimeoutTimer.Enabled = false;
                 if (serialport.IsOpen)
                 {
@@ -1535,7 +1535,7 @@ namespace NewCalibrationtool
         {
             if (simulatorTemp < 320 )
             {
-                if (bestvalue == true && counter <= 3)  // if best value equals to true and counter is less than 3 then we will take small temperature steps of 20.
+                if (bestvalue == true && counter <= 3)  // If best value equals to true and counter is less than 3 then we will take small temperature steps of 20.
                 {
                     simulatorTemp += 20;
                     bestloop = true;                     
@@ -1601,15 +1601,89 @@ namespace NewCalibrationtool
 
         private void Add_data_excelsheet()
         {
+            if (xlapp == null)
+            {
+                MessageBox.Show("Excel is not properly installed!!");
+                return;
+            }
             xlWorkBook = xlapp.Workbooks.Open(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
             //  xlWorkBook = xlapp.Workbooks.Add(misvalue);
             xlWorkSheet = xlWorkBook.Worksheets[1];
-            xlWorkSheet.Cells[8, column] = scale.ToString();
-            xlWorkSheet.Cells[9, column] = Offsetscale.ToString();
-            for (int j = 0; j < diffvalues.Count; j++)
+            if (clear==true)                              // For checking if clear function is enabled.
             {
-                xlWorkSheet.Cells[12 + j, 1] = tempvalues[j];
-                xlWorkSheet.Cells[12 + j, column] = diffvalues[j];
+                xlWorkSheet.Cells.ClearContents();
+            }
+            
+            //xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Excel.Range xlRange = xlWorkSheet.UsedRange;
+
+
+
+
+
+            xlWorkSheet.Cells[1, 1] = "Controller Type:";
+            xlWorkSheet.Cells[1, 1].Font.Bold = true;
+            xlWorkSheet.Cells[1, 2] = textBox1.Text;
+            xlWorkSheet.Cells[2, 1] = "Serial Number:";
+            xlWorkSheet.Cells[2, 1].Font.Bold = true;
+            xlWorkSheet.Cells[2, 2] = textBox2.Text;
+            xlWorkSheet.Cells[3, 1] = "ID-Number:";
+            xlWorkSheet.Cells[3, 1].Font.Bold = true;
+            xlWorkSheet.Cells[3, 2] = textBox3.Text;
+            xlWorkSheet.Cells[4, 1] = "Inspector:";
+            xlWorkSheet.Cells[4, 1].Font.Bold = true;
+            xlWorkSheet.Cells[4, 2] = textBox4.Text;
+            xlWorkSheet.Cells[5, 1] = "Date:";
+            xlWorkSheet.Cells[5, 1].Font.Bold = true;
+            xlWorkSheet.Cells[5, 2] = textBox5.Text;
+            xlWorkSheet.Cells[6, 1] = "ChargeNr:";
+            xlWorkSheet.Cells[6, 1].Font.Bold = true;
+            xlWorkSheet.Cells[6, 2] = textBox6.Text;
+            xlWorkSheet.Cells[7, 1] = "System ID:";
+            xlWorkSheet.Cells[7, 1].Font.Bold = true;
+            xlWorkSheet.Cells[7, 2] = SysIDText.Text;
+            xlWorkSheet.Cells[8, 1] = "Linearity:";
+            xlWorkSheet.Cells[8, 1].Font.Bold = true;
+            if (column != 0)
+            {
+                xlWorkSheet.Cells[8, column] = scale.ToString();
+                xlWorkSheet.Cells[9, column] = Offsetscale.ToString();
+            }
+           
+
+
+            xlWorkSheet.Cells[9, 1] = "Offset:";
+            xlWorkSheet.Cells[9, 1].Font.Bold = true;
+           
+            object[] objHeaders = { "Mesuared Value CH0", "Mesuared Value CH1", "Mesuared Value CH2", "Mesuared Value CH3", "Mesuared Value CH4", "Mesuared Value CH5", "Mesuared Value CH6", "Mesuared Value CH7" };
+            m_objRange = xlWorkSheet.get_Range("B11", "I11");
+            m_objRange.set_Value(misvalue, objHeaders);
+            xlWorkSheet.Cells[11, 1].entirerow.Font.Bold = true;
+            xlWorkSheet.Cells[11, 1] = "Set Tempreture";
+            xlWorkSheet.Cells[34, 1] = "AC3 TS0xx/SP1xx HTU:";
+            xlWorkSheet.Cells[34, 1].Font.Bold = true;
+            xlWorkSheet.Cells[36, 1] = "AC3 TS0xx/SP1xx :";
+            xlWorkSheet.Cells[36, 1].Font.Bold = true;
+            xlWorkSheet.Cells[34, 2] = "tolerance: ± 0,05°C -50°C bis 150°C";
+            xlWorkSheet.Cells[35, 2] = "± 0,10°C <-50°C und >150°C";
+            xlWorkSheet.Cells[36, 2] = "tolerance:     ± 0,10°C";
+            xlWorkSheet.Cells[37, 1] = "Passed:";
+            xlWorkSheet.Cells[37, 1].Font.Bold = true;
+            xlWorkSheet.Cells[37, 2] = "Yes____";
+            xlWorkSheet.Cells[37, 3] = "No____";
+
+            xlWorkSheet.Cells[39, 1] = "Comment:";
+            xlWorkSheet.Cells[39, 1].Font.Bold = true;
+            xlWorkSheet.Cells[42, 1] = "Signature:";
+            xlWorkSheet.Cells[42, 1].Font.Bold = true;
+            if (column != 0)
+            {
+                for (int j = 0; j < diffvalues.Count; j++)
+                {
+                    xlWorkSheet.Cells[12 + j, 1] = tempvalues[j];
+                    xlWorkSheet.Cells[12 + j, column] = diffvalues[j];
+                }
+
             }
 
 
@@ -1626,7 +1700,9 @@ namespace NewCalibrationtool
             Marshal.ReleaseComObject(xlapp);
 
             MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\TEMPDATA.xls");
+      
         }
+
         #region Update graph list function
         private void updateGraphList()
         {
@@ -2012,185 +2088,100 @@ namespace NewCalibrationtool
         private void Save_datasheet_Click(object sender, EventArgs e)
         {
 
-            if (xlapp == null)
-            {
-                MessageBox.Show("Excel is not properly installed!!");
-                return;
-            }
-            xlWorkBook = xlapp.Workbooks.Open(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
-            //  xlWorkBook = xlapp.Workbooks.Add(misvalue);
-            xlWorkSheet = xlWorkBook.Worksheets[1];
-          
-            //xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            Excel.Range xlRange = xlWorkSheet.UsedRange;
-
-           
-
-
-
-            xlWorkSheet.Cells[1, 1] = "Controller Type:";
-            xlWorkSheet.Cells[1, 1].Font.Bold = true;
-            xlWorkSheet.Cells[1, 2] = textBox1.Text;
-            xlWorkSheet.Cells[2, 1] = "Serial Number:";
-            xlWorkSheet.Cells[2, 1].Font.Bold = true;
-            xlWorkSheet.Cells[2, 2] = textBox2.Text;
-            xlWorkSheet.Cells[3, 1] = "ID-Number:";
-            xlWorkSheet.Cells[3, 1].Font.Bold = true;
-            xlWorkSheet.Cells[3, 2] = textBox3.Text;
-            xlWorkSheet.Cells[4, 1] = "Inspector:";
-            xlWorkSheet.Cells[4, 1].Font.Bold = true;
-            xlWorkSheet.Cells[4, 2] = textBox4.Text;
-            xlWorkSheet.Cells[5, 1] = "Date:";
-            xlWorkSheet.Cells[5, 1].Font.Bold = true;
-            xlWorkSheet.Cells[5, 2] = textBox5.Text;
-            xlWorkSheet.Cells[6, 1] = "ChargeNr:";
-            xlWorkSheet.Cells[6, 1].Font.Bold = true;
-            xlWorkSheet.Cells[6, 2] = textBox6.Text;
-            xlWorkSheet.Cells[7, 1] = "System ID:";
-            xlWorkSheet.Cells[7, 1].Font.Bold = true;
-            xlWorkSheet.Cells[7, 2] = SysIDText.Text;
-            xlWorkSheet.Cells[8, 1] = "Linearity:";
-            xlWorkSheet.Cells[8, 1].Font.Bold = true;
-           
-            xlWorkSheet.Cells[8, column] = scale.ToString();
-               
-            
-         
-            xlWorkSheet.Cells[9, 1] = "Offset:";
-            xlWorkSheet.Cells[9, 1].Font.Bold = true;
-            xlWorkSheet.Cells[9, column] = Offsetscale.ToString();
-            object[] objHeaders = { "Mesuared Value CH0", "Mesuared Value CH1", "Mesuared Value CH2", "Mesuared Value CH3", "Mesuared Value CH4", "Mesuared Value CH5", "Mesuared Value CH6", "Mesuared Value CH7" };
-            m_objRange = xlWorkSheet.get_Range("B11", "I11");
-            m_objRange.set_Value(misvalue, objHeaders);
-            xlWorkSheet.Cells[11, 1].entirerow.Font.Bold = true;
-            xlWorkSheet.Cells[11, 1] = "Set Tempreture";
-            xlWorkSheet.Cells[34, 1] = "AC3 TS0xx/SP1xx HTU:";
-            xlWorkSheet.Cells[34, 1].Font.Bold = true;
-            xlWorkSheet.Cells[36, 1] = "AC3 TS0xx/SP1xx :";
-            xlWorkSheet.Cells[36, 1].Font.Bold = true;
-            xlWorkSheet.Cells[34, 2] = "tolerance: ± 0,05°C -50°C bis 150°C";
-            xlWorkSheet.Cells[35, 2] = "± 0,10°C <-50°C und >150°C";
-            xlWorkSheet.Cells[36, 2] = "tolerance:     ± 0,10°C";
-            xlWorkSheet.Cells[37, 1] = "Passed:";
-            xlWorkSheet.Cells[37, 1].Font.Bold = true;
-            xlWorkSheet.Cells[37, 2] = "Yes____";
-            xlWorkSheet.Cells[37, 3] = "No____";
-
-            xlWorkSheet.Cells[39, 1] = "Comment:";
-            xlWorkSheet.Cells[39, 1].Font.Bold = true;
-            xlWorkSheet.Cells[42, 1] = "Signature:";
-            xlWorkSheet.Cells[42, 1].Font.Bold = true;
-            for (int j = 0; j < diffvalues.Count; j++)
-            {
-                xlWorkSheet.Cells[12 + j, 1] = tempvalues[j];
-                xlWorkSheet.Cells[12 + j, column] = diffvalues[j];
-            }
-
-
-
-
-
-            xlWorkSheet.Columns.AutoFit();
-            xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
-            xlWorkBook.Close(true, misvalue, misvalue);
-            xlapp.Quit();
-
-            Marshal.ReleaseComObject(xlWorkSheet);
-            Marshal.ReleaseComObject(xlWorkBook);
-            Marshal.ReleaseComObject(xlapp);
-
-            MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\TEMPDATA.xls");
-
+            Add_data_excelsheet();
         }
         #endregion
-   
 
+        bool clear = false;
         private void Clear_datasheet_Click(object sender, EventArgs e)
         {
-            xlWorkBook = xlapp.Workbooks.Open(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
-            xlWorkSheet = xlWorkBook.Worksheets[1];
-            xlWorkSheet.Cells.ClearContents();
-            Excel.Range xlRange = xlWorkSheet.UsedRange;
-
-
-            xlWorkSheet.Cells[1, 1] = "Controller Type:";
-            xlWorkSheet.Cells[1, 1].Font.Bold = true;
-            xlWorkSheet.Cells[1, 2] = textBox1.Text;
-            xlWorkSheet.Cells[2, 1] = "Serial Number:";
-            xlWorkSheet.Cells[2, 1].Font.Bold = true;
-            xlWorkSheet.Cells[2, 2] = textBox2.Text;
-            xlWorkSheet.Cells[3, 1] = "ID-Number:";
-            xlWorkSheet.Cells[3, 1].Font.Bold = true;
-            xlWorkSheet.Cells[3, 2] = textBox3.Text;
-            xlWorkSheet.Cells[4, 1] = "Inspector:";
-            xlWorkSheet.Cells[4, 1].Font.Bold = true;
-            xlWorkSheet.Cells[4, 2] = textBox4.Text;
-            xlWorkSheet.Cells[5, 1] = "Date:";
-            xlWorkSheet.Cells[5, 1].Font.Bold = true;
-            xlWorkSheet.Cells[5, 2] = textBox5.Text;
-            xlWorkSheet.Cells[6, 1] = "ChargeNr:";
-            xlWorkSheet.Cells[6, 1].Font.Bold = true;
-            xlWorkSheet.Cells[6, 2] = textBox6.Text;
-            xlWorkSheet.Cells[7, 1] = "System ID:";
-            xlWorkSheet.Cells[7, 1].Font.Bold = true;
-            xlWorkSheet.Cells[7, 2] = SysIDText.Text;
-            xlWorkSheet.Cells[8, 1] = "Linearity:";
-            xlWorkSheet.Cells[8, 1].Font.Bold = true;
-            if (column != 0)
-            {
-                xlWorkSheet.Cells[8, column] = scale.ToString();
-                xlWorkSheet.Cells[9, column] = Offsetscale.ToString();
-            }
-          
-            xlWorkSheet.Cells[9, 1] = "Offset:";
-            xlWorkSheet.Cells[9, 1].Font.Bold = true;
-         
-            object[] objHeaders = { "Mesuared Value CH0", "Mesuared Value CH1", "Mesuared Value CH2", "Mesuared Value CH3", "Mesuared Value CH4", "Mesuared Value CH5", "Mesuared Value CH6", "Mesuared Value CH7" };
-            m_objRange = xlWorkSheet.get_Range("B11", "I11");
-            m_objRange.set_Value(misvalue, objHeaders);
-            xlWorkSheet.Cells[11, 1].entirerow.Font.Bold = true;
-            xlWorkSheet.Cells[11, 1] = "Set Tempreture";
-            xlWorkSheet.Cells[34, 1] = "AC3 TS0xx/SP1xx HTU:";
-            xlWorkSheet.Cells[34, 1].Font.Bold = true;
-            xlWorkSheet.Cells[36, 1] = "AC3 TS0xx/SP1xx :";
-            xlWorkSheet.Cells[36, 1].Font.Bold = true;
-            xlWorkSheet.Cells[34, 2] = "tolerance: ± 0,05°C -50°C bis 150°C";
-            xlWorkSheet.Cells[35, 2] = "± 0,10°C <-50°C und >150°C";
-            xlWorkSheet.Cells[36, 2] = "tolerance:     ± 0,10°C";
-            xlWorkSheet.Cells[37, 1] = "Passed:";
-            xlWorkSheet.Cells[37, 1].Font.Bold = true;
-            xlWorkSheet.Cells[37, 2] = "Yes____";
-            xlWorkSheet.Cells[37, 3] = "No____";
-
-            xlWorkSheet.Cells[39, 1] = "Comment:";
-            xlWorkSheet.Cells[39, 1].Font.Bold = true;
-            xlWorkSheet.Cells[42, 1] = "Signature:";
-            xlWorkSheet.Cells[42, 1].Font.Bold = true;
-            if (column != 0)
-            {
-                for (int j = 0; j < diffvalues.Count; j++)
-                {
-                    xlWorkSheet.Cells[12 + j, 1] = tempvalues[j];
-                    xlWorkSheet.Cells[12 + j, column] = diffvalues[j];
-                }
-            }
-         
-
-
-            xlWorkSheet.Columns.AutoFit();
-            xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
-            xlWorkBook.Close(true, misvalue, misvalue);
-            xlapp.Quit();
-
-            Marshal.ReleaseComObject(xlWorkSheet);
-            Marshal.ReleaseComObject(xlWorkBook);
-            Marshal.ReleaseComObject(xlapp);
-
-            MessageBox.Show("Excel file created , you can find the file @ C:\\Users\\panchal\\source\\repos\\Excel files.xlsx");
+            clear = true;
+            Add_data_excelsheet();
+            clear = false;                              // For disabling clear function .
 
         }
 
-   
+        private void singlecycle_Click(object sender, EventArgs e)
+        {
+            max = 0;                                                          //<<<<<<<<----------- For reset the max temp value
+            min = 6;                                                      //<<<<<<<<<<<-------------- For reset the min temp value
+
+
+
+            timerEnablePlot = true;
+            Singlecycletimer.Interval = 30000;
+            switch (ChannelType)
+            {
+                case channelType.Channel1:
+                case channelType.Channel2:
+                case channelType.Channel3:
+                case channelType.Channel4:
+                case channelType.Channel5:
+                case channelType.Channel6:
+                case channelType.Channel7:
+                case channelType.Channel8:
+                    simulatorTemp = -80;
+                    ExternalTemp.Text = simulatorTemp.ToString();
+                    sendTemp(simulatorTemp.ToString());
+
+                    Singlecycletimer.Enabled = true;
+                    Singlecycletimer.Start();
+                    break;
+                case channelType.Undef:
+                    Singlecycletimer.Stop();
+                    MessageBox.Show("Please select channel type.");
+                    break;
+            }
+
+
+        }
+
+        private void Singlecycletimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Singlecycletimer.Stop();
+
+                measureTempDifference();
+            
+
+
+                maxDifferenceinTemp();
+                minDifferenceinTemp();
+
+                updateGraphList();
+              
+                if (simulatorTemp < 320)
+                {
+                    simulatorTemp += 20;
+                    ExternalTemp.Text = simulatorTemp.ToString();
+                    label34.Text = string.Format("{0:f3}", difference);
+                }
+                else
+                {
+                    Singlecycletimer.Stop();
+                    timerEnablePlot = false;
+                }
+
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                if (timerEnablePlot == true )
+                {
+                    Singlecycletimer.Start();
+                }
+
+            }
+
+        }
+
+
 
 
 

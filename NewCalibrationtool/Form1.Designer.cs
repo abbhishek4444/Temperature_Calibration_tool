@@ -54,7 +54,7 @@ namespace NewCalibrationtool
             this.label8 = new System.Windows.Forms.Label();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.ReadComTimer = new System.Windows.Forms.Timer(this.components);
+            this.Singlecycletimer = new System.Windows.Forms.Timer(this.components);
             this.Timerlimit = new System.Windows.Forms.Timer(this.components);
             this.TimeoutTimer = new System.Windows.Forms.Timer(this.components);
             this.loopTimer = new System.Windows.Forms.Timer(this.components);
@@ -139,6 +139,7 @@ namespace NewCalibrationtool
             this.maxtimerlimit = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
+            this.singlecycle = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.NetGroupBox.SuspendLayout();
             this.CalibrationGroupBox.SuspendLayout();
@@ -430,9 +431,10 @@ namespace NewCalibrationtool
             // 
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick_1);
             // 
-            // ReadComTimer
+            // Singlecycletimer
             // 
-            this.ReadComTimer.Interval = 200;
+            this.Singlecycletimer.Interval = 200;
+            this.Singlecycletimer.Tick += new System.EventHandler(this.Singlecycletimer_Tick);
             // 
             // Timerlimit
             // 
@@ -970,7 +972,7 @@ namespace NewCalibrationtool
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(644, 289);
+            this.label34.Location = new System.Drawing.Point(674, 289);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(113, 20);
             this.label34.TabIndex = 56;
@@ -1281,11 +1283,22 @@ namespace NewCalibrationtool
             this.label45.TabIndex = 67;
             this.label45.Text = "(1000=1sec)";
             // 
+            // singlecycle
+            // 
+            this.singlecycle.Location = new System.Drawing.Point(975, 285);
+            this.singlecycle.Name = "singlecycle";
+            this.singlecycle.Size = new System.Drawing.Size(153, 34);
+            this.singlecycle.TabIndex = 68;
+            this.singlecycle.Text = "Single Cycle";
+            this.singlecycle.UseVisualStyleBackColor = true;
+            this.singlecycle.Click += new System.EventHandler(this.singlecycle_Click);
+            // 
             // Calibrationtool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1538, 893);
+            this.Controls.Add(this.singlecycle);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.label39);
             this.Controls.Add(this.maxtimerlimit);
@@ -1349,7 +1362,7 @@ namespace NewCalibrationtool
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox IPAddrTextBox;
         private System.Windows.Forms.Timer UpdateTimer;
-        private System.Windows.Forms.Timer ReadComTimer;
+        private System.Windows.Forms.Timer Singlecycletimer;
         private System.Windows.Forms.Timer Timerlimit;
         private System.Windows.Forms.Timer TimeoutTimer;
         private System.Windows.Forms.Timer loopTimer;
@@ -1434,6 +1447,7 @@ namespace NewCalibrationtool
         private System.Windows.Forms.TextBox maxtimerlimit;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button singlecycle;
     }
 }
 
