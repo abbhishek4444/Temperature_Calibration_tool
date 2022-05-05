@@ -91,6 +91,7 @@ namespace NewCalibrationtool
         private bool timerEnablePlot = false;
         List<Double> tempvalues = new List<double>();
         List<Double> diffvalues = new List<double>();
+       
         List<double> Avglist = new List<double>(10);
         int list = 0;
 
@@ -1578,6 +1579,7 @@ namespace NewCalibrationtool
                    
                     tempvalues.Clear();
                     diffvalues.Clear();
+                
                     max = 0;                                                          //<<<<<<<<----------- For reset the max temp value
                     min = 6;                                                      //<<<<<<<<<<<-------------- For reset the min temp value
                     simulatorTemp = -80;
@@ -1691,14 +1693,19 @@ namespace NewCalibrationtool
 
 
             xlWorkSheet.Columns.AutoFit();
-            xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
-            xlWorkBook.Close(true, misvalue, misvalue);
+            if (save == true && filenametext.Text!=null)
+            {
+                xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\" + filenametext.Text + ".xls");
+            }
+            else 
+            {
+                xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
+            }
+          
+            xlWorkBook.Close();
             xlapp.Quit();
 
-            Marshal.ReleaseComObject(xlWorkSheet);
-            Marshal.ReleaseComObject(xlWorkBook);
-            Marshal.ReleaseComObject(xlapp);
-
+   
             MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\TEMPDATA.xls");
       
         }
@@ -2085,10 +2092,12 @@ namespace NewCalibrationtool
         #endregion
         #region Excelsheet save button
         object misvalue = System.Reflection.Missing.Value;
+        bool save = false;
         private void Save_datasheet_Click(object sender, EventArgs e)
         {
-
+            save = true;
             Add_data_excelsheet();
+            save = false;
         }
         #endregion
 

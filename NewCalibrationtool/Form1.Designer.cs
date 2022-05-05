@@ -140,6 +140,8 @@ namespace NewCalibrationtool
             this.label39 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.singlecycle = new System.Windows.Forms.Button();
+            this.filenamelabel = new System.Windows.Forms.Label();
+            this.filenametext = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.NetGroupBox.SuspendLayout();
             this.CalibrationGroupBox.SuspendLayout();
@@ -397,7 +399,7 @@ namespace NewCalibrationtool
             this.IPAddrTextBox.Name = "IPAddrTextBox";
             this.IPAddrTextBox.Size = new System.Drawing.Size(194, 26);
             this.IPAddrTextBox.TabIndex = 1;
-            this.IPAddrTextBox.Text = "172.30.240.200";
+            this.IPAddrTextBox.Text = "172.30.240.";
             this.IPAddrTextBox.TextChanged += new System.EventHandler(this.IPAddrTextBox_TextChanged);
             // 
             // label8
@@ -1032,6 +1034,8 @@ namespace NewCalibrationtool
             // 
             // DatasheetGroupBox
             // 
+            this.DatasheetGroupBox.Controls.Add(this.filenametext);
+            this.DatasheetGroupBox.Controls.Add(this.filenamelabel);
             this.DatasheetGroupBox.Controls.Add(this.SysIDText);
             this.DatasheetGroupBox.Controls.Add(this.label36);
             this.DatasheetGroupBox.Controls.Add(this.Save_datasheet);
@@ -1048,18 +1052,18 @@ namespace NewCalibrationtool
             this.DatasheetGroupBox.Controls.Add(this.label43);
             this.DatasheetGroupBox.Controls.Add(this.label44);
             this.DatasheetGroupBox.Controls.Add(this.Controller);
-            this.DatasheetGroupBox.Location = new System.Drawing.Point(818, 32);
+            this.DatasheetGroupBox.Location = new System.Drawing.Point(813, 32);
             this.DatasheetGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DatasheetGroupBox.Name = "DatasheetGroupBox";
             this.DatasheetGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.DatasheetGroupBox.Size = new System.Drawing.Size(692, 229);
+            this.DatasheetGroupBox.Size = new System.Drawing.Size(697, 249);
             this.DatasheetGroupBox.TabIndex = 57;
             this.DatasheetGroupBox.TabStop = false;
             this.DatasheetGroupBox.Text = "Datasheet";
             // 
             // SysIDText
             // 
-            this.SysIDText.Location = new System.Drawing.Point(147, 149);
+            this.SysIDText.Location = new System.Drawing.Point(147, 143);
             this.SysIDText.Name = "SysIDText";
             this.SysIDText.Size = new System.Drawing.Size(522, 26);
             this.SysIDText.TabIndex = 50;
@@ -1067,7 +1071,7 @@ namespace NewCalibrationtool
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(26, 149);
+            this.label36.Location = new System.Drawing.Point(49, 146);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(56, 20);
             this.label36.TabIndex = 49;
@@ -1075,10 +1079,10 @@ namespace NewCalibrationtool
             // 
             // Save_datasheet
             // 
-            this.Save_datasheet.Location = new System.Drawing.Point(360, 185);
+            this.Save_datasheet.Location = new System.Drawing.Point(391, 209);
             this.Save_datasheet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Save_datasheet.Name = "Save_datasheet";
-            this.Save_datasheet.Size = new System.Drawing.Size(112, 35);
+            this.Save_datasheet.Size = new System.Drawing.Size(116, 35);
             this.Save_datasheet.TabIndex = 48;
             this.Save_datasheet.Text = "Save";
             this.Save_datasheet.UseVisualStyleBackColor = true;
@@ -1086,7 +1090,7 @@ namespace NewCalibrationtool
             // 
             // Clear_datasheet
             // 
-            this.Clear_datasheet.Location = new System.Drawing.Point(220, 185);
+            this.Clear_datasheet.Location = new System.Drawing.Point(221, 209);
             this.Clear_datasheet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Clear_datasheet.Name = "Clear_datasheet";
             this.Clear_datasheet.Size = new System.Drawing.Size(112, 35);
@@ -1176,7 +1180,7 @@ namespace NewCalibrationtool
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(8, 106);
+            this.label43.Location = new System.Drawing.Point(28, 106);
             this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(94, 20);
@@ -1186,7 +1190,7 @@ namespace NewCalibrationtool
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(8, 68);
+            this.label44.Location = new System.Drawing.Point(12, 68);
             this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(117, 20);
@@ -1285,7 +1289,7 @@ namespace NewCalibrationtool
             // 
             // singlecycle
             // 
-            this.singlecycle.Location = new System.Drawing.Point(975, 285);
+            this.singlecycle.Location = new System.Drawing.Point(962, 285);
             this.singlecycle.Name = "singlecycle";
             this.singlecycle.Size = new System.Drawing.Size(153, 34);
             this.singlecycle.TabIndex = 68;
@@ -1293,11 +1297,27 @@ namespace NewCalibrationtool
             this.singlecycle.UseVisualStyleBackColor = true;
             this.singlecycle.Click += new System.EventHandler(this.singlecycle_Click);
             // 
+            // filenamelabel
+            // 
+            this.filenamelabel.AutoSize = true;
+            this.filenamelabel.Location = new System.Drawing.Point(2, 180);
+            this.filenamelabel.Name = "filenamelabel";
+            this.filenamelabel.Size = new System.Drawing.Size(143, 20);
+            this.filenamelabel.TabIndex = 51;
+            this.filenamelabel.Text = "Excel sheet name :";
+            // 
+            // filenametext
+            // 
+            this.filenametext.Location = new System.Drawing.Point(147, 178);
+            this.filenametext.Name = "filenametext";
+            this.filenametext.Size = new System.Drawing.Size(521, 26);
+            this.filenametext.TabIndex = 52;
+            // 
             // Calibrationtool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1538, 893);
+            this.ClientSize = new System.Drawing.Size(1536, 895);
             this.Controls.Add(this.singlecycle);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.label39);
@@ -1448,6 +1468,8 @@ namespace NewCalibrationtool
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Button singlecycle;
+        private System.Windows.Forms.TextBox filenametext;
+        private System.Windows.Forms.Label filenamelabel;
     }
 }
 
