@@ -115,6 +115,8 @@ namespace NewCalibrationtool
             this.init = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.DatasheetGroupBox = new System.Windows.Forms.GroupBox();
+            this.filenametext = new System.Windows.Forms.TextBox();
+            this.filenamelabel = new System.Windows.Forms.Label();
             this.SysIDText = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.Save_datasheet = new System.Windows.Forms.Button();
@@ -140,8 +142,6 @@ namespace NewCalibrationtool
             this.label39 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.singlecycle = new System.Windows.Forms.Button();
-            this.filenamelabel = new System.Windows.Forms.Label();
-            this.filenametext = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.NetGroupBox.SuspendLayout();
             this.CalibrationGroupBox.SuspendLayout();
@@ -982,18 +982,18 @@ namespace NewCalibrationtool
             // 
             // Stopbtn
             // 
-            this.Stopbtn.Location = new System.Drawing.Point(566, 278);
+            this.Stopbtn.Location = new System.Drawing.Point(701, 194);
             this.Stopbtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Stopbtn.Name = "Stopbtn";
-            this.Stopbtn.Size = new System.Drawing.Size(60, 31);
+            this.Stopbtn.Size = new System.Drawing.Size(104, 34);
             this.Stopbtn.TabIndex = 55;
-            this.Stopbtn.Text = "Stop";
+            this.Stopbtn.Text = "Stop Cycle";
             this.Stopbtn.UseVisualStyleBackColor = true;
             this.Stopbtn.Click += new System.EventHandler(this.Stopbtn_Click);
             // 
             // ExternalTemp
             // 
-            this.ExternalTemp.Location = new System.Drawing.Point(656, 234);
+            this.ExternalTemp.Location = new System.Drawing.Point(661, 246);
             this.ExternalTemp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ExternalTemp.Name = "ExternalTemp";
             this.ExternalTemp.Size = new System.Drawing.Size(62, 26);
@@ -1002,10 +1002,10 @@ namespace NewCalibrationtool
             // 
             // cycleTemp
             // 
-            this.cycleTemp.Location = new System.Drawing.Point(566, 186);
+            this.cycleTemp.Location = new System.Drawing.Point(566, 157);
             this.cycleTemp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cycleTemp.Name = "cycleTemp";
-            this.cycleTemp.Size = new System.Drawing.Size(153, 31);
+            this.cycleTemp.Size = new System.Drawing.Size(157, 31);
             this.cycleTemp.TabIndex = 53;
             this.cycleTemp.Text = "Temp Cycle On";
             this.cycleTemp.UseVisualStyleBackColor = true;
@@ -1013,10 +1013,10 @@ namespace NewCalibrationtool
             // 
             // init
             // 
-            this.init.Location = new System.Drawing.Point(566, 148);
+            this.init.Location = new System.Drawing.Point(566, 122);
             this.init.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.init.Name = "init";
-            this.init.Size = new System.Drawing.Size(120, 31);
+            this.init.Size = new System.Drawing.Size(131, 31);
             this.init.TabIndex = 52;
             this.init.Text = "REMOTE";
             this.init.UseVisualStyleBackColor = true;
@@ -1025,7 +1025,7 @@ namespace NewCalibrationtool
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(561, 238);
+            this.label35.Location = new System.Drawing.Point(566, 250);
             this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(98, 20);
@@ -1056,10 +1056,26 @@ namespace NewCalibrationtool
             this.DatasheetGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DatasheetGroupBox.Name = "DatasheetGroupBox";
             this.DatasheetGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.DatasheetGroupBox.Size = new System.Drawing.Size(697, 249);
+            this.DatasheetGroupBox.Size = new System.Drawing.Size(697, 255);
             this.DatasheetGroupBox.TabIndex = 57;
             this.DatasheetGroupBox.TabStop = false;
             this.DatasheetGroupBox.Text = "Datasheet";
+            // 
+            // filenametext
+            // 
+            this.filenametext.Location = new System.Drawing.Point(147, 178);
+            this.filenametext.Name = "filenametext";
+            this.filenametext.Size = new System.Drawing.Size(521, 26);
+            this.filenametext.TabIndex = 52;
+            // 
+            // filenamelabel
+            // 
+            this.filenamelabel.AutoSize = true;
+            this.filenamelabel.Location = new System.Drawing.Point(2, 180);
+            this.filenamelabel.Name = "filenamelabel";
+            this.filenamelabel.Size = new System.Drawing.Size(143, 20);
+            this.filenamelabel.TabIndex = 51;
+            this.filenamelabel.Text = "Excel sheet name :";
             // 
             // SysIDText
             // 
@@ -1289,29 +1305,13 @@ namespace NewCalibrationtool
             // 
             // singlecycle
             // 
-            this.singlecycle.Location = new System.Drawing.Point(962, 285);
+            this.singlecycle.Location = new System.Drawing.Point(566, 194);
             this.singlecycle.Name = "singlecycle";
-            this.singlecycle.Size = new System.Drawing.Size(153, 34);
+            this.singlecycle.Size = new System.Drawing.Size(131, 34);
             this.singlecycle.TabIndex = 68;
             this.singlecycle.Text = "Single Cycle";
             this.singlecycle.UseVisualStyleBackColor = true;
             this.singlecycle.Click += new System.EventHandler(this.singlecycle_Click);
-            // 
-            // filenamelabel
-            // 
-            this.filenamelabel.AutoSize = true;
-            this.filenamelabel.Location = new System.Drawing.Point(2, 180);
-            this.filenamelabel.Name = "filenamelabel";
-            this.filenamelabel.Size = new System.Drawing.Size(143, 20);
-            this.filenamelabel.TabIndex = 51;
-            this.filenamelabel.Text = "Excel sheet name :";
-            // 
-            // filenametext
-            // 
-            this.filenametext.Location = new System.Drawing.Point(147, 178);
-            this.filenametext.Name = "filenametext";
-            this.filenametext.Size = new System.Drawing.Size(521, 26);
-            this.filenametext.TabIndex = 52;
             // 
             // Calibrationtool
             // 

@@ -1678,7 +1678,7 @@ namespace NewCalibrationtool
             xlWorkSheet.Cells[39, 1].Font.Bold = true;
             xlWorkSheet.Cells[42, 1] = "Signature:";
             xlWorkSheet.Cells[42, 1].Font.Bold = true;
-            if (column != 0)
+            if (column != 0)                                   //If any of channel is selected then 
             {
                 for (int j = 0; j < diffvalues.Count; j++)
                 {
@@ -1693,25 +1693,37 @@ namespace NewCalibrationtool
 
 
             xlWorkSheet.Columns.AutoFit();
-            if (save == true && filenametext.Text!=null)
+        
+           
+            if (save == true && filenametext.Text != "")                  //If save button is clicked and file name is given then 
             {
-                xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\" + filenametext.Text + ".xls");
+              xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\" + filenametext.Text + ".xls");
+              MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\" + filenametext.Text + ".xls");
+
             }
-            else 
+            else if(clear == true)
             {
-                xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
+              xlWorkBook.Save();
+              MessageBox.Show("Excel file is cleared .");
             }
-          
+            else
+            {
+              xlWorkBook.SaveAs(@"C:\Users\apanchal\Desktop\New folder\TEMPDATA.xls");
+              MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\TEMPDATA.xls");
+            }
+
+            
+
+
             xlWorkBook.Close();
             xlapp.Quit();
-
-   
-            MessageBox.Show("Excel file created , you can find the file @C:\\Users\\apanchal\\Desktop\\New folder\\TEMPDATA.xls");
+    
+           
       
         }
         #endregion
         #region Update graph list function
-        private void updateGraphList()
+        private void updateGraphList() 
         {
 
             if (list == 0)
@@ -2097,7 +2109,7 @@ namespace NewCalibrationtool
         {
             save = true;
             Add_data_excelsheet();
-            save = false;
+            save = false;    
         }
         #endregion
 
