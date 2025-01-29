@@ -43,8 +43,8 @@ The **Temperature Calibration Tool** automates the calibration process for tempe
    - Click on **Start (F5)** in Visual Studio.
 
 ## 📷 Screenshots (Optional)
-Include screenshots of the calibration process, graphs, and report generation.
-![Alt Text](Temperature_Calibration_tool/Calibrationtool.png)
+This how the calibration tool App look like
+![Alt Text](Calibrationtool.png)
 
 ## 📜 How It Works
 
@@ -62,9 +62,6 @@ Include screenshots of the calibration process, graphs, and report generation.
 - Commit your changes with clear messages.
 - Create a pull request for review.
 
-## 📄 License
-
-This project is licensed under [Your Chosen License, e.g., MIT, Apache 2.0].
 
 ## 📞 Contact
 
